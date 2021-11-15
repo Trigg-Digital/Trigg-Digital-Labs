@@ -91,7 +91,7 @@ rm $BUILDXML_FILE
 git checkout -- src/package.xml
 
 # The following is required otherwise Bamboo only pushes to the local repo!
-git config remote.origin.url "https://github.com/Selina-Finance/salesforce.git"
+git config remote.origin.url "https://github.com/Trigg-Digital/Trigg-Digital-Labs"
 
 # Check whether there are any changes under testdata/talend
 git status
