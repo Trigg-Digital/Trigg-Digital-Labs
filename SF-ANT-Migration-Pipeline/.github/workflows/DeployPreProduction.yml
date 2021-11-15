@@ -1,0 +1,38 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Build Pre Production
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  workflow_run:
+    workflows: ["Validate Pre Prod"]
+    types: [completed]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  on-success:
+    runs-on: ubuntu-latest
+    
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    
+    steps:
+        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        - name: Checkout
+          uses: actions/checkout@v2
+
+        # Runs a command
+        - name: Run LoadMetadata.sh
+          run: scripts/loadMetadata.sh
+          env:
+            SANDBOX_NAME: Pre Production
+            SFUSER: ${{ secrets.PREPROD_USERNAME }}
+            SFPASSWORD: ${{ secrets.PREPROD_PASSWORD }}
+            CHECKONLY: FALSE
+            TESTLEVEL: ${{ secrets.ORGWIDE_TESTLEVEL}}
+          
+  # on-failure:        
+  #   runs-on: ubuntu-latest
+    
+  #   if: ${{ github.event.workflow_run.conclusion == 'failure' }}
