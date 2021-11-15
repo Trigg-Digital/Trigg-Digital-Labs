@@ -136,6 +136,30 @@ cat $BUILDPROPERTIES_FILE
 echo "***********************************************************************"
 
 # Copy package.xml into src dir
+BRANCHNAME="${BRANCH_NAME}"
+echo "Branch Name: $BRANCHNAME"
+if [[ "$BRANCHNAME" == "sprint/"* ]]
+then
+  echo "Deploying sprint Package"
+  cp manifest/sprintpackage.xml src/package.xml
+
+elif [[ "$BRANCHNAME" == "feature/"* ]]
+then
+  echo "Deploying feature Package"
+  cp manifest/featurepackage.xml src/package.xml
+
+elif [[ "$BRANCHNAME" == "release/"* ]]
+then
+  echo "Deploying release Package"
+  cp manifest/releasepackage.xml src/package.xml
+
+elif [[ "$BRANCHNAME" == "master"* ]]
+then
+  echo "Deploying master"
+else
+  echo "Branch Type not handled"
+  exit
+fi
 #cp manifest/package.xml src/package.xml
 
 # Copy destructuveChanges.xml into src directory

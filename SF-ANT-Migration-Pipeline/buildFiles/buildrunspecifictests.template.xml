@@ -19,7 +19,7 @@
     <sf:retrieve username="${sf.username}" password="${sf.password}"
       sessionId="${sf.sessionId}" serverurl="${sf.serverurl}"
       maxPoll="${sf.maxPoll}" retrieveTarget="src"
-      unpackaged="manifest/package.xml"/>
+      unpackaged="manifest/retrievepackage.xml"/>
   </target>
 
   <!-- Deploy the unpackaged set of metadata retrieved with retrieveUnpackaged and run tests in this organization's namespace only-->
